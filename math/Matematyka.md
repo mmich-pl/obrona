@@ -335,30 +335,115 @@ Dla poniższego grafu wyglądałoby to następująco:
 \end{document}
 ```
 
-```tikz
-\usetikzlibrary{arrows.meta}
+## Relacje binarne, własności i metody reprezentacji. 
+
+### Iloczyn kartezjański zbiorów  
+Rozważa się dwa zbiory $X$ i $Y$. Zbiór wszystkich uporządkowanych par elementów należących odpowiednio do tych zbiorów, nazywa się iloczynem (albo produktem) kartezjańskim zbiorów $X$ i $Y$. Iloczyn kartezjański oznacza się jako $X \times Y$. Można to zapisać w następujący sposób: $X \times Y={(x,y): x \in X \text{ i } y \in Y}$.
+
+$$
+% determinant form
+\begin{align*}
+X \times Y = \{1,2,3,4\} \times \{a,b,c\} =\begin{vmatrix}
+(1, a) & (1, b) & (1, c)\\
+(2, a) & (2, b) & (2, c)\\
+(3, a) & (3, b) & (3, c)\\
+(4, a) & (4, b) & (4, c)\\
+\end{vmatrix}
+\end{align*}
+$$
+Operacja iloczynu kartezjańskiego nie jest przemienna.
+
+### Relacje binarne
+>[!info] Relacje binarne
+ Relacja binarna (dwuargumentowa) to podzbiór iloczynu kartezjańskiego dwóch zbiorów.
+ >
+ >Jeśli weźmiemy $A = X \times Y$ , to $W_{A}$,  oznacza pewną własność, a zarazem podzbiór, iloczynu kartezjańskiego $X \times Y$ . 
+>
+>Ten podzbiór, czyli zbiór par o pewnej własności, to właśnie relacja — relacja pomiędzy pierwszą a drugą zmienną w iloczynie kartezjańskim.
+>Relacje będziemy oznaczać grecką literą $\rho$. Także jeśli rozpatrujemy relację \$rho$ pomiędzy elementami zbioru $X$ a elementami zbioru $Y$ , czyli relację w iloczynie kartezjańskim $X \times Y$ , to formalnie $\rho \subseteq X \times Y$.
+>
+>Piszemy
+> - $(x, y) \in \rho$ i mówimy, że para $(x, y)$ należy do relacji \rho, albo piszemy
+> - $x \: \rho \: y$ i wtedy mówimy, że element $x$ jest w relacji $\rho$ z elementem $y$, dla $x \in X$ oraz $y \in Y$ .
+
+#### Własności relacji
+Rozważamy relację $\rho \subseteq X \times X$ dla dowolnego zbioru $X$.
+- **zwrotność** Relacja $\rho$ jest zwrotna, $\Longleftrightarrow$ dla każdego $x \in X$ zachodzi $x \: \rho \: x$. Innymi słowy, zwrotność relacji oznacza, że każdy element jest w relacji ze sobą.
+- **symetria** Relacja $\rho$ jest symetryczna, $\Longleftrightarrow$ dla dowolnych $x, y \in X$ jeśli $x \: \rho \: y$, to $y \rho x$. Intuicyjnie, symetria relacji oznacza, że możemy zamienić $x$ z $y$ w parze $(x, y)$ o ile w ogóle $(x, y) \in \rho$. Tak więc kolejność występowania elementów w relacji nie ma tutaj znaczenia.
+- **antysymetria** Relacja $\rho$ jest antysymetryczna, $\Longleftrightarrow$ dla dowolnych $x, y \in X \text{ jeśli } x \: \rho \: y \text{ oraz } y \: \rho \: x, \text{ to } x = y$. Tak więc antysymetria relacji oznacza, że kolejność występowania różnych elementów w relacji jest istotna. To znaczy, że dla x 6 = y albo $x \: \rho \: y$, albo $y \: \rho \: x$, albo nie zachodzi ani jedno, ani drugie. 
+- **przechodniość** Relacja $\rho$ jest przechodnia, $\Longleftrightarrow$ dla dowolnych $x, y, z \in X$ jeśli $x \: \rho \: y$ oraz $y \: \rho \: z$, to również $x \: \rho \: z$.
+#### Sposób reprezentacji
+ **Grafowa**
+ ```tikz
+\usetikzlibrary{positioning,chains,fit,shapes,calc}
+
 \begin{document}
-\begin{tikzpicture}
-\begin{scope}[every node/.style={circle,thick,draw}]
-    \node (A) at (0,0) {A};
-    \node (B) at (0,3) {B};
-    \node (C) at (2.5,2) {C};
-    \node (D) at (2.5,-2) {D};
+
+\definecolor{myblue}{RGB}{80,80,160}
+\definecolor{mygreen}{RGB}{80,160,80}
+
+\begin{tikzpicture}[thick,
+  every node/.style={draw,circle},
+  fsnode/.style={fill=myblue},
+  ssnode/.style={fill=mygreen},
+  every fit/.style={ellipse,draw,inner sep=-2pt,text width=2cm},
+  ->,shorten >= 3pt,shorten <= 3pt
+]
+
+\begin{scope}[start chain=going below,node distance=7mm]
+\foreach \i in {1,2,...,4}
+  \node[fsnode,on chain] (f\i) [label=left: x\i] {};
 \end{scope}
 
-\begin{scope}[>={Stealth[black]},
-              every node/.style={fill=white,circle},
-              every edge/.style={draw=black,very thick}]
- \path [->] (A) edge (B);
- \path [->] (A) edge (D);
- \path [->] (B) edge (C);
- \path [->] (C) edge (A);
+\begin{scope}[xshift=4cm,yshift=-0.5cm,start chain=going below,node distance=7mm]
+\foreach \j in {1,2,...,4}
+  \node[ssnode,on chain] (s\j) [label=right: y\j] {};
 \end{scope}
+
+\node [myblue,fit=(f1) (f4),label=above:$X$] {};
+\node [mygreen,fit=(s1) (s4),label=above:$Y$] {};
+
+\draw (f1) -- (s1);
+\draw (f2) -- (s2);
+\draw (f3) -- (s3);
+\draw (f4) -- (s4);
 \end{tikzpicture}
+
 \end{document}
 ```
 
-## Relacje binarne, własności i metody reprezentacji. 
+**Wykres współrzędnych**
+```tikz
+\begin{document} 
+\begin{tikzpicture}[domain=0:4] 
+\draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9); 
+\draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$}; 
+\draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$}; 
+\draw[color=red] plot (\x,{\x}) node[right] {$f(x)=x$};
+\end{tikzpicture} \end{document} 
+```
+**Macierzowa**
+
+$$
+\begin{align*}
+M_{R} &= (m_{ij})                   \\[.75em]
+%
+m(i,j) & = \begin{cases}
+            1    & (a_{i},b_{j}) \in R        \\[.75em]
+            0    & (a_{i},b_{j}) \notin R    \\
+           \end{cases}              \\[.75em]
+ i &= 1,2,\dots m                   \\[.75em]
+ j &= 1,2,\dots n
+    \end{align*}
+$$
+
+| R | $b_1$ | $b_2$ | $b_3$ |
+| ---- | ---- | ---- | ---- |
+| $a_1$ | 0 | 1 | 0 |
+| $a_2$ | 0 | 0 | 1 |
+| $a_3$ | 1 | 0 | 0 |
+| $a_4$ | 0 | 0 | 0 |
+
 ## Zasada indukcji matematycznej. 
 ## Twierdzenie Bayesa. 
 ## Testowanie hipotez statystycznych. 
