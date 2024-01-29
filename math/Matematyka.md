@@ -37,7 +37,141 @@ $$\int x \log x \,dx =
 \frac{x^2}{2}\log x - \int \frac{x^2}{2}\frac{1}{x} \,dx
 $$
 ## Wielomian i szereg Taylora funkcji rzeczywistej. 
-## Układy równań liniowych: różne metody rozwiazywania, liczba rozwiązań. 
+## Układy równań liniowych: różne metody rozwiązywania, liczba rozwiązań. 
+
+### Wzory Cramera
+Możemy ich użyć gdy:
+- liczba równań jest równa liczbie niewiadomych
+- wyznacznik główny macierzy jest różny od 0
+	- W przeciwnym przypadku, gdy $det ( a 1 , … , a n ) = 0$ układ jest
+		- _sprzeczny_ (nie ma rozwiązań), gdy choć jeden wyznacznik we wzorach Cramera zawierający jest różny od zera;
+		- _nieoznaczony_ (ma więcej niż jedno rozwiązanie) lub sprzeczny, gdy wszystkie wyznaczniki we wzorach Cramera zawierające są równe zeru.
+
+$W$ - wyznacznik główny
+$W_{x}, W_{y}, W_{z}, \dots$ - wyznaczniki, w których współczynniki przy $x,y,z,\dots$ zastępujemy wyrazami wolnymi
+
+$$
+\begin{align*}
+&\begin{cases}
+2x+5y+3z = 5  \\[.75em]
+4x+2y+5z = 4   \\[.75em]
+3x+8y+4z = 9   \\[.75em]
+\end{cases}   \\[1.25em]
+
+
+W = &\begin{bmatrix} 
+ 2 & 5 & 3\\
+ 4 & 2 & 5\\
+ 3 & 8 & 6 \\
+\end{bmatrix} = 9 \\[1.25em]
+
+W_{x} = \begin{bmatrix} 
+ 5 & 5 & 3\\
+ 4 & 2 & 5\\
+ 9 & 8 & 6 \\
+\end{bmatrix} = 27 \: \: \: \: \: \: \: \:
+
+W_{y} = &\begin{bmatrix} 
+ 2 & 5 & 3\\
+ 4 & 4 & 5\\
+ 3 & 9 & 6 \\
+\end{bmatrix} = 9 \: \: \: \: \: \: \: \:
+
+W_{z} = \begin{bmatrix} 
+ 2 & 5 & 5\\
+ 4 & 2 & 4\\
+ 3 & 8 & 9 \\
+\end{bmatrix} = -18\\[1.25em]
+
+&\begin{cases}
+x = \frac{W_{x}}{W} = \frac{27}{9} = 3  \\[.75em]
+y = \frac{W_{y}}{W} = \frac{9}{9} = 1  \\[.75em]
+z = \frac{W_{z}}{W} = \frac{-18}{9} = -2  \\[.75em]
+\end{cases}   \\[1.25em]
+\end{align*} 
+$$
+
+### Metoda Gaussa
+>[!info] Twierdzenie Kroneckera-Capellego
+
+
+1. Układ równań jest zapisywany pod postacią macierzy współczynników
+2. Następuje przekształcenie wierszy za pomocą operacji elementarnych
+	- dodanie lub odjęcie do dowolnego wiersza pomnożonego przez liczbę lub w niezmienionej postaci
+	- pomnożenie dowolnego wiersza przez liczbę inną niż 0
+	- zamiana miejscami dwóch wierszy
+3. Przekształcenia mają na celu otrzymanie macierzy schodkowej czyli spełniającej warunki
+	- na schodkach są tylko liczby różne od 0
+	- pod schodkami są tylko 0
+4. Z otrzymanej macierzy układane są rozwiązania równań zaczynając od ostatniego wiersza.
+$$
+\begin{align*}
+&\begin{cases}
+x+2y-z = 5  \\[.75em]
+3x+4y+z = 9   \\[.75em]
+2x-2y+3z = 1   \\[.75em]
+\end{cases}   \\[1.25em]
+
+
+&\left[
+\begin{array}{ccc|c}
+1 & 2 & -1 & 5 \\
+3 & 4 & 1 & 9 \\
+2 & -2 & 3 & -1 \\
+\end{array}
+\right]
+
+\begin{array}{c}
+~\\
+-3w_{1} \\
+-2w_{1} \\
+\end{array} \longrightarrow
+
+\left[
+\begin{array}{ccc|c}
+1 & 2 & -1 & 5 \\
+0 & -2 & 4 & -6 \\
+0 & -6 & 5 & -11 \\
+\end{array}
+\right]
+
+\begin{array}{c}
+~\\
+~ \\
+* -1 \\
+\end{array} \longrightarrow \\[1.25em]
+
+&\left[
+\begin{array}{ccc|c}
+1 & 2 & -1 & 5 \\
+0 & -2 & 4 & -6 \\
+0 & 6 & -5 & 11 \\
+\end{array}
+\right]
+
+\begin{array}{c}
+~\\
+~ \\
++3w_{2} \\
+\end{array} \longrightarrow
+
+\left[
+\begin{array}{ccc|c}
+1 & 2 & -1 & 5 \\
+0 & -2 & 4 & -6 \\
+0 & 0 & 7 & -7 \\
+\end{array}
+\right]\\[1.25em]
+
+
+
+&\begin{cases}
+x+2y-z=5 \Rightarrow x=2 \\[.75em]
+-2y + 4z = -6 \Rightarrow y = 1 \\[.75em]
+7z = -7 \Rightarrow z = -1 \\[.75em]
+\end{cases} 
+\end{align*} 
+$$
 ## Wartości własne macierzy i ich zastosowanie w informatyce.
 ## Grafy i ich typy, metody reprezentacji grafów. 
 **Graf** –  struktura matematyczna służąca do przedstawiania i badania relacji między obiektami. W uproszczeniu graf to zbiór wierzchołków, które mogą być połączone krawędziami w taki sposób, że każda krawędź kończy się i zaczyna w którymś z wierzchołków.
@@ -372,6 +506,12 @@ Rozważamy relację $\rho \subseteq X \times X$ dla dowolnego zbioru $X$.
 - **symetria** Relacja $\rho$ jest symetryczna, $\Longleftrightarrow$ dla dowolnych $x, y \in X$ jeśli $x \: \rho \: y$, to $y \rho x$. Intuicyjnie, symetria relacji oznacza, że możemy zamienić $x$ z $y$ w parze $(x, y)$ o ile w ogóle $(x, y) \in \rho$. Tak więc kolejność występowania elementów w relacji nie ma tutaj znaczenia.
 - **antysymetria** Relacja $\rho$ jest antysymetryczna, $\Longleftrightarrow$ dla dowolnych $x, y \in X \text{ jeśli } x \: \rho \: y \text{ oraz } y \: \rho \: x, \text{ to } x = y$. Tak więc antysymetria relacji oznacza, że kolejność występowania różnych elementów w relacji jest istotna. To znaczy, że dla x 6 = y albo $x \: \rho \: y$, albo $y \: \rho \: x$, albo nie zachodzi ani jedno, ani drugie. 
 - **przechodniość** Relacja $\rho$ jest przechodnia, $\Longleftrightarrow$ dla dowolnych $x, y, z \in X$ jeśli $x \: \rho \: y$ oraz $y \: \rho \: z$, to również $x \: \rho \: z$.
+
+>[!example]
+>Niech X = zbiór wszystkich ludzi (o jasno określonej płci). Dla $x, y \in X$ określamy relację $/rho$ w następujący sposób "$x  \: \rho \: y \Longleftrightarrow x$ jest tej samej płci co $y$".
+>- **zwrotność**: Zawsze człowiek $x$ jest tej samej płci co $x$, tzn. $x  \: \rho \: x$, więc relacja jest zwrotna.
+>- **symetria**: Jeśli człowiek $x$ jest tej samej płci co człowiek $y$, to również na odwrót, $y$ jest tej samej płci co $x$. Zatem relacja ρ jest symetryczna.
+>- **przechodniość**: Załóżmy, że człowiek $x$ jest tej samej płci co $y$ oraz, że $y$ jest tej samej płci co $z$. Wówczas wszyscy $x, y, z$ są tej samej płci, w szczególności $x$ jest tej samej płci co $z$. Zatem relacja ρ jest przechodnia.
 #### Sposób reprezentacji
  **Grafowa**
  ```tikz
