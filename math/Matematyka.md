@@ -21,22 +21,77 @@ Funkcja $f(x)=x^3$ to funkcja pierwotna w stosunku do funkcji $3x^2$ w zbior
 ### Całka nieoznaczona
 **Całką nieoznaczoną** funkcji $f(x)$ nazywamy wyrażenie $F(x)+C$. Całkę funkcji $f(x)$ oznaczamy następująco: $\int_{}^{} f(x) \,dx = F(x) + C$.
 
+$$\int  x^2 \, dx = \frac{x^{2+1}}{2+1} + C = \frac{x^3}{3}+C $$
 
-## Całkowanie przez podstawienie, czyli zamianę zmiennej
+### Całka oznaczona
+Jeżeli $F(x)$ jest funkcją pierwotną funkcji $f(x)$ ciągłej w danym przedziale $[x_{1}, x_{2}]$, to różnicę funkcji pierwotnych $F(x_{1})$ i $F(x_{2})$ nazywamy **całką oznaczoną** dla funkcji $f$ od $x_{1}$ do $x_2$.
 
+$$ \int ^{x_{2}}_{x_{1}} f(x) \, dx = F(x_{2}) - F(x_{1})$$
 
-
+$$\int ^{3}_{1} x^2\, dx = \left[ \frac{x^3}{3} \right]^{3}_{1} = 9 - \frac{1}{3} = \frac{26}{3}$$
+### Całkowanie przez podstawienie, czyli zamianę zmiennej
+Całkowanie przez podstawienie stosujemy, gdy wśród funkcji podcałkowej potrafimy wyodrębnić pewną funkcję i jej pochodną.
 $$\int x \log x \,dx =
-\left[
+\left|
   \begin{alignedat}{2}
   u       &= \log x             \quad & \,dv &= x \,dx \\
   \,du &= \frac{1}{x} x \,dx \quad & v &= \frac{x^2}{2}
   \end{alignedat}\,
-\right]
+\right|
 =
 \frac{x^2}{2}\log x - \int \frac{x^2}{2}\frac{1}{x} \,dx
 $$
+
+### Całkowanie przez części
+Jeżeli funkcje $u$ i $v$ mają na pewnym przedziale $P$ ciągłe pochodne $u'$ i $v'$, to $\large \int f'(x) g(x) \, dx = f(x)g(x) - \int f(x) g'(x) \, dx$ na tym przedziale.
+
+$$\begin{align}
+\int x \ln x \,dx &=
+\left|
+  \begin{alignedat}{2}
+  g(x)    &= \ln x    \quad & f'(x) &= x \\
+  \,g'(x) &= \frac{1}{x} \quad & f(x)&= \frac{x^2}{2}
+  \end{alignedat}\,
+\right|\\
+&=
+\frac{x^2}{2}\ln x - \int \frac{x^2}{2}\frac{1}{x} \,dx \\&= \frac{1}{2}x^2\ln x - \frac{1}{2}\int x \, dx \\&= \frac{1}{2}x^2x\ln x-\frac{1}{4}x^2+c
+\end{align}$$
+
+### Metoda prostokątów
+Dzielimy dany przedział $**[a, b]**$ na $n$ odcinków. W każdym odcinku wyliczamy wartości funkcji dla argumentów z początku i końca odcinka. Uśredniony wynik to wysokość prostokąta o podstawie równej długości odcinka.
+### Metoda trapezów
+Przedział całkowania dzielimy na $n$ równych odcinków. Następnie obliczamy wartości funkcji $f(x)$ w punktach $a$ i $b$ oraz w punktach, które są końcami dwóch odcinków. Wtedy całkę obliczamy następująco:
+$$\int ^a_{b} f(x) \, dx \approx h\left( \frac{f(a)}{2} + \sum_{i=2}^n f(x_{i}) + \frac{f(b)}{2} \right)$$
+### Zastosowanie całek
+- obliczanie pól figur płaskich
+- obliczanie długości łuku krzywej
+- obliczanie pola powierzchni bryły obrotowej
+- obliczanie pracy wykonywanej przez zmienną siłę
 ## Wielomian i szereg Taylora funkcji rzeczywistej. 
+**Szereg Taylora to wielomian, który przybliża funkcję** w bliskim otoczeniu. Przybliżenie to **dotyczy dowolnego punktu** $x$, a nie tylko jednego konkretnego i wyróżnionego punktu. Wzór Taylora jest bardzo ogólny i **opisuje funkcję jako całość**.
+
+**Definicja**
+Jeśli funkcja $f$ ma w punkcie $x_{0}$ pochodną rzędu $k$, to **wielomianem Taylora rzędu $k$** funkcji $f$ w $x_0$ nazywamy wielomian
+
+$$\begin{align}
+T_{x_{0}} &= f(x_{0}) + \frac{f'(x_{0})}{1!}(x-x_{0}) + \dots + \frac{f^{(k)}(x_{0})}{k!}(x-x_{0})^k \\ \\
+&= f(x_{0}) + \sum^{k-1}_{i=1}\frac{f^{(i)}(x_{0})}{i!}(x-x_{0})^i
+\end{align}
+$$
+W szczególnym przypadku gdy $x_{0} =0$ wielomian
+$$T_{0}(x) = f(0)+\frac{f'(0)}{1!}x+\dots+\frac{f^{(k)}(0)}{k!}x^k$$
+nazywamy **wielomianem MacLaurina rzędu $k$ funkcji $f$.**
+
+**Wzór Taylora z resztą w postaci Lagrange'a**
+
+Jeśli funkcja $f$
+1. ma ciągłą pochodną rzędu _n-1_ w przedziale $[x_{0}, x]$
+2. ma pochodną rzędu n w przedziale otwartym $(x_{0}, x)$
+to istnieje punkt $c \in (x_{0},x)$, taki że:
+$$f(x)= T_{x_{0}}(x) + R_{n}(x)= f(x_{0}) + \sum^{k-1}_{i=1}\frac{f^{(i)}(x_{0})}{i!}(x-x_{0})^i + R_{n}(x)$$
+gdzie $\large R_{n}=\frac{f^{(n)}(c)}{n!}(x−x_{0})^n$ dla pewnego $c \in (x_{0}, x)$.
+
+Pomijając we wzorze Taylora resztę $R_{n}(x)$ otrzymujemy w otoczeniu punktu $x_{0}$ przybliżenie funkcji $f$ wielomianem stopnia (co najwyżej) $n-1$. n-ta reszta z wzoru Taylora to po prostu liczba wskazująca na _błąd przybliżenia liczby $f(x)$ liczbą_ $T_{x_{0}}(x)$
 ## Układy równań liniowych: różne metody rozwiązywania, liczba rozwiązań. 
 
 ### Wzory Cramera
@@ -92,9 +147,40 @@ z = \frac{W_{z}}{W} = \frac{-18}{9} = -2  \\[.75em]
 $$
 
 ### Metoda Gaussa
->[!info] Twierdzenie Kroneckera-Capellego
+>[!info] Rząd macierzy
+>Chcąc obliczyć rząd macierzy musimy znaleźć największą macierz, której wyznacznik jest różny od zera, wielkość tej niezerowej macierzy będzie szukaną wartością, czyli jeśli największą macierzą, której wyznacznik jest różny od zera jest macierz 3x3 to rząd macierzy jest równy 3.
 
+#### Twierdzenie Kroneckera-Capellego
+To twierdzenie jest nam pomocne przy określaniu **liczby rozwiązań** układu równań liniowych. W przeciwieństwie do Twierdzenia Cramera, tutaj układ równań może być dowolny (tzn. liczba równań i niewiadomych nie muszą być sobie równe).
 
+$$
+\begin{align*}
+&\begin{cases}
+x+2y-z = 5  \\[.75em]
+3x+4y+z = 9   \\[.75em]
+2x-2y+3z = 1   \\[.75em]
+\end{cases}   \\[1.25em]
+&A = \left[
+\begin{array}{ccc}
+1 & 2 & -1  \\
+3 & 4 & 1  \\
+2 & -2 & 3  \\
+\end{array}
+\right]\\[1.2em]
+&U = \left[
+\begin{array}{ccc|c}
+1 & 2 & -1 & 5 \\
+3 & 4 & 1 & 9 \\
+2 & -2 & 3 & -1 \\
+\end{array}
+\right]
+\end{align*}
+$$
+ Warunkiem koniecznym i wystarczającym na to, aby układ miał rozwiązanie jest równość rzędów macierzy głównej $A$ i macierzy uzupełnionej $U$ czyli: $r(A)=r(U)$.
+- Jeśli $r(A)=r(U)=n$ , gdzie $n$ jest liczba niewiadomych, to układ ma dokładnie jedno rozwiązanie. 
+- Jeśli $r(A)=r(U)<n$, to układ ma nieskończenie wiele rozwiązań zależnych od $n-r$ parametrów.
+- Jeśli $r(A) \neq r(U)$, to układ nie ma rozwiązań i nazywa się układem sprzecznym. 
+---
 1. Układ równań jest zapisywany pod postacią macierzy współczynników
 2. Następuje przekształcenie wierszy za pomocą operacji elementarnych
 	- dodanie lub odjęcie do dowolnego wiersza pomnożonego przez liczbę lub w niezmienionej postaci
@@ -585,6 +671,40 @@ $$
 | $a_4$ | 0 | 0 | 0 |
 
 ## Zasada indukcji matematycznej. 
+Chcąc udowodnić wzór, w którym zmienna jest liczbą naturalna, najpierw musimy sprawdzić czy jest on prawdziwy, dla chociaż jednego przypadku (początkowego), czyli dla liczby $n$. Jeśli jest to prawdą, to można założyć, że jest to prawdą dla liczby naturalnej $k$, która jest równa lub większa od $n$. Wykorzystując warunek, że wzór jest prawdziwy dla liczby naturalnej $k$, udowadnia się, że wzór jest prawdziwy dla liczby naturalnej $k+1$ (czyli o jeden większej).  
+Jest to o tyle genialna metoda, że udowadnia w trzech korkach i sprawdza wszystkie liczby naturalne.
+
+Schemat **indukcji matematycznej**:  
+1) udowodnienie prawdziwości twierdzenia dla pewnej liczby naturalnej $n$,  
+2) założenie, że twierdzenie jest prawdziwe dla liczby naturalnej 𝑘, takiej że $k \geq n$,  
+3) udowodnienie prawdziwości twierdzenia dla $k+1$.
 ## Twierdzenie Bayesa. 
+Tradycyjna metoda obliczania prawdopodobieństwa warunkowego (prawdopodobieństwa zajścia jednego zdarzenia przy zaistnieniu innego zdarzenia) polega na wykorzystaniu wzoru na prawdopodobieństwo warunkowe, obliczeniu łącznego prawdopodobieństwa wystąpienia pierwszego i drugiego zdarzenia w tym samym czasie, a następnie podzieleniu go prawdopodobieństwem wystąpienia drugiego zdarzenia. Jednak prawdopodobieństwo warunkowe można również obliczyć w nieco inny sposób, korzystając z twierdzenia Bayesa.
+
+Obliczając prawdopodobieństwo warunkowe za pomocą twierdzenia Bayesa, należy wykonać następujące kroki:
+
+- Określ prawdopodobieństwo spełnienia warunku B, zakładając, że warunek A jest prawdziwy.
+- Określ prawdopodobieństwo, że zdarzenie A będzie prawdziwe.
+- Pomnóż oba prawdopodobieństwa przez siebie.
+- Podziel przez prawdopodobieństwo wystąpienia zdarzenia B.
+
+Oznacza to, że wzór na twierdzenie Bayesa można wyrazić w następujący sposób:
+
+$$P(A|B) = \frac{P(B|A)*P(A)}{P(B)}$$
+
 ## Testowanie hipotez statystycznych. 
+
+>[!info] Hipotezy statystyczne 
+> To **dowolne przypuszczenie dotyczące rozkładu populacji**. Formułowanie hipotezy statystycznej rozpoczyna się od zebrania informacji na temat populacji i jej możliwego rozkładu. Dzięki temu możliwe jest zbudowanie zbioru hipotez dopuszczalnych $\Omega$, czyli zbioru rozkładów, które mogą charakteryzować badaną populację. 
+
+Hipotezy statystyczne można podzielić na:
+- parametryczne - hipoteza dotyczy wartości parametru rozkładu,
+- nieparametryczne - hipoteza dotyczy postaci funkcyjnej rozkładu.
+
+Według innego kryterium, hipotezy statystyczne mogą być:
+- proste - hipoteza jednoznacznie określa rozkład danej populacji, czyli odpowiadający jej podzbiór zbioru Ω zawiera jeden element (rozkład),
+- złożone - hipoteza określa całą grupę rozkładów, zaś odpowiadający jej podzbiór zbioru Ω zawiera więcej niż jeden element.
+
+
+
 ## Wyznaczanie przedziałów ufności.
