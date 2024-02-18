@@ -1,3 +1,5 @@
+
+
 ## Całka nieoznaczona, oznaczona, zastosowanie i techniki obliczania.
 
 >[!info] Pochodna funkcji
@@ -259,6 +261,22 @@ x+2y-z=5 \Rightarrow x=2 \\[.75em]
 \end{align*} 
 $$
 ## Wartości własne macierzy i ich zastosowanie w informatyce.
+
+>[!info] Endomorfizm liniowy – przekształcenie liniowe przestrzeni $V$ zgodnie ze wzorem $f: V \rightarrow V$ (przejście w taką samą przestrzeń).  Macierz endomorfizmu jest macierzą kwadratową  
+
+$v \in V$ – **wektor własny** endomorfizmu $f$, jeśli $v \neq 0$ oraz istnieje $\lambda \in R$ takie, że $f(v) = \lambda*v$ 
+W tym równaniu, $\lambda$ – **wartość własna** endomorfizmu $f$.
+
+Przykład endomorfizmu: $f: R^3 \rightarrow R^3$
+Dla $f([1,1,1]) = [5,5,5] = 5*[1,1,1]$ -> wektor własny to $[1,1,1]$, a wartość własna to $5$.
+
+
+
+Zastosowanie wartości własnych w informatyce:
+- Rankingowanie stron internetowych w wyszukiwarce Google (algorytm PageRank – linki między stronami i wagi tych linków są zapisane w macierzach, wartość własna przyspiesza liczenie tych wag)
+- PCA (principal component analysis – do zmniejszania wymiarowości danych używanych przy uczeniu maszynowym, przy zmniejszaniu wymiarów, tworzona jest macierz kowariancji zmiennych (powinienem to opisać w zagadnieniu 9 lub 10)  po znalezieniu jej wektora własnego, wektor ten wyznacza kierunek hiperpłaszczyzny, na którą rzutujemy atrybuty danych)
+- Algorytm partycji grafów (dzielenie grafów na kilka mniejszych, które są ze sobą połączone pojedynczymi przejściami, druga najmniejsza wartość własna w macierzy przejść daje nam dolną granicę optymalnego przecięcia grafu)
+
 ## Grafy i ich typy, metody reprezentacji grafów. 
 **Graf** –  struktura matematyczna służąca do przedstawiania i badania relacji między obiektami. W uproszczeniu graf to zbiór wierzchołków, które mogą być połączone krawędziami w taki sposób, że każda krawędź kończy się i zaczyna w którymś z wierzchołków.
 
@@ -697,14 +715,43 @@ $$P(A|B) = \frac{P(B|A)*P(A)}{P(B)}$$
 >[!info] Hipotezy statystyczne 
 > To **dowolne przypuszczenie dotyczące rozkładu populacji**. Formułowanie hipotezy statystycznej rozpoczyna się od zebrania informacji na temat populacji i jej możliwego rozkładu. Dzięki temu możliwe jest zbudowanie zbioru hipotez dopuszczalnych $\Omega$, czyli zbioru rozkładów, które mogą charakteryzować badaną populację. 
 
-Hipotezy statystyczne można podzielić na:
-- parametryczne - hipoteza dotyczy wartości parametru rozkładu,
-- nieparametryczne - hipoteza dotyczy postaci funkcyjnej rozkładu.
+**Hipoteza zerowa** – hipoteza, której prawdziwość poddajemy w wątpliwość i która jest testowana celem ewentualnego odrzucenia, oznaczana jako
 
-Według innego kryterium, hipotezy statystyczne mogą być:
-- proste - hipoteza jednoznacznie określa rozkład danej populacji, czyli odpowiadający jej podzbiór zbioru Ω zawiera jeden element (rozkład),
-- złożone - hipoteza określa całą grupę rozkładów, zaś odpowiadający jej podzbiór zbioru Ω zawiera więcej niż jeden element.
+**Hipoteza alternatywna** ­– hipoteza, która będzie przyjęta, jeśli odrzucimy hipotezę zerową, oznaczana jako  
+Hipoteza zerowa i alternatywna mają się wzajemnie wykluczać  
+Staramy się udowodnić hipotezę alternatywną, co pozwoli na odrzucenie hipotezy zerowej. **Odrzucenie hipotezy alternatywnej nie oznacza, że hipoteza zerowa jest prawdziwa ani fałszywa** (mówimy wtedy, że „nie możemy odrzucić hipotezy zerowej”)
 
+**Błąd I rodzaju** – błąd polegający na przyjęciu  gdy hipoteza  jest prawdziwa.  
+**Poziom istotności testu** – prawdopodobieństwo popełnienia błędu pierwszego rodzaju, oznaczane grecką literą α
 
+**Statystyka testowa** – statystyka, na której podstawie orzekamy prawdziwość , oznaczana dużą literą Z (statystyka to kwantyl danego rozkładu. Z karty wzorów patrzymy na odpowiedni kwantyl, zależny od poziomu istotności, i sprawdzamy, czy nasza statystyka testowa jest od niego większa. To znaczy, że należy ona do zbioru krytycznego). W zależności od typu hipotezy, mamy różne wzory na statystykę testową (mieliśmy do tego kartę wzorów)
 
+**Zbiór krytyczny** – zbiór wartości statystyki testowej Z, dla których odrzucamy na korzyść ,  
+oznaczany jako: }
+
+**Błąd II rodzaju** – błąd polegający na przyjęciu , gdy hipoteza  jest prawdziwa
+
+Proces testowania hipotez statystycznych składa się z kilku kroków:
+- **Formułowanie hipotezy**: Formułuje się hipotezę na temat parametrów populacji na podstawie danych teoretycznych lub wcześniejszych badań.
+- **Wybór statystyki testowej**: Wybiera się odpowiednią statystykę testową, która będzie używana do oceny hipotezy.
+- **Wybór poziomu istotności**: Wybiera się poziom istotności, który określa, jak wysokie prawdopodobieństwo omyłki jesteśmy gotowi zaakceptować.
+- **Otrzymanie danych empirycznych**: Przeprowadza się badanie lub gromadzi dane empiryczne, które będą użyte do testowania hipotezy.
+- **Ocena hipotezy**: Porównuje się otrzymane dane empiryczne z wartościami teoretycznymi i ocenia, czy hipoteza jest potwierdzona lub odrzucona.
+- **Podejmowanie decyzji**: Na podstawie wyniku testu podejmuje się decyzję, czy hipoteza jest potwierdzona lub odrzucona.
 ## Wyznaczanie przedziałów ufności.
+**Estymator punktowy** – jest to statystyka  dla ustalonej funkcji $h$, której celem jest oszacowanie parametru rozkładu oznaczanego jako $\theta$ (parametr to np. mediana, odchylenie standardowe itp.) np. średnia arytmetyczna to estymator wartości oczekiwanej (średniej oznaczanej literą $\mu$ np. w rozkładzie normalnym)
+
+**Estymator nieobciążony** – niezależnie od tego, jaką wartość ma parametr, funkcja będąca estymatorem nieobciążonym zwraca dokładnie tą wartość parametru, jaka jest w rzeczywistości (średnia z prostej próby losowej jest estymatorem nieobciążonym wartości oczekiwanej)
+
+Przedziały ufności pozwalają nam określić zakres wartości, w jakich znajduje się dany parametr na  $1-\alpha \%$ ($\alpha$ określa **poziom ufności**). Tak jak przy testowaniu hipotez, to jak ten przedział wyliczyć zależy od różnych rzeczy – mieliśmy na to kartę wzorów.
+
+Modele obliczania przedziału ufności:
+1.       Dla wartości oczekiwanej:
+	- Rozkład normalny – znamy odchylenie standardowe
+	- Rozkład normalny – nie znamy odchylenia standardowego
+	- Dowolny rozkład – nie znamy odchylenia standardowego + próbka o wielkości min. 50 obserwacji
+	- Rozkład Bernoulliego – min. 100 obserwacji
+2.       Dla wariancji:
+	- Rozkład normalny – wartość oczekiwana jest znana
+	- Rozkład normalny – wartość oczekiwana nie jest znana
+	- Rozkład dowolny – wartość oczekiwana nie jest znana + min. 100 obserwacji

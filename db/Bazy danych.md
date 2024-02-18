@@ -16,7 +16,6 @@
 	- [[#Podstawowe zasady optymalizacji zapytań, w tym rodzaje i znaczenie indeksów w bazie danych.#Indeksy w bazie danych|Indeksy w bazie danych]]
 		- [[#Indeksy w bazie danych#Rodzaje indeksów|Rodzaje indeksów]]
 
-
 ## Podstawowe cechy relacyjnych baz danych.
 Relacyjna baza danych to rodzaj bazy danych, który pozwala przechowywać powiązane ze sobą elementy danych i zapewnia do nich dostęp.
 
@@ -35,6 +34,84 @@ Każda relacja posiada swój tzw. schemat, który składa się z listy atrybut�
 - Model relacyjny oznacza, że logiczne struktury danych — tabele danych, widoki i indeksy — są oddzielone od fizycznych struktur pamięci.
 
 ## Podstawowe elementy i znaczenie diagramów związków encji oraz zasady prawidłowego projektowania schematów bazy danych.
+
+**CASE (Computer Aided System Engineering)** – narzędzia graficzne do projektowania i rysowania diagramów na ekranie komputera, generowania schematu bazy danych itp.
+
+**Diagram związków encji** – diagram służący do przedstawienia modelu danych z pominięciem szczegółów technicznych związaną z implementacją danych w konkretnym systemie.
+
+Diagram związków encji powinien:
+- Jednoznacznie określać wymagania użytkowników i pozwolić im sprawdzić, czy analityk systemu dobrze zrozumiał ich intencje i specyfikę działania firmy
+- Być istotnie prostszy od schematu bazy danych (ponieważ pomija szczegóły implementacyjne, którymi zajmuje się projektant baz danych)
+
+### Elementy diagramu związków encji
+**Encja** – obiekt, coś co istnieje, co jest odróżnialne od innych, o czym informację trzeba znać lub przechowywać. Encje reprezentowane są ramką:
+
+```plantuml
+@startuml
+!theme carbon-gray
+skinparam backgroundColor transparent
+entity Student {
+  *person_id: <<PK>>
+  ---
+  *name: text
+  *last_name: text
+  *graduation_date: date
+}
+@enduml
+```
+**Atrybut** – właściwość encji danego typu, opisywana pewną wartością (liczba całkowita, napis, data itp.). Zbiór atrybutów opisuje encję, a zbiór konkretnych wartości atrybutów opisuje instancję encji. **Dla pierwszej postaci normalnej:** **każdy atrybut powinien mieć pojedynczą, atomową wartość**
+
+**Klucz** – jednoznaczny identyfikator instancji danej encji (jak w bazach relacyjnych, jest główny i alternatywne). **Encje słabe\zależne** – takie, które w kluczu głównym mają klucz obcy
+
+**Typy zmiennych (dziedziny atrybutów)** – zbiory wartości, które mogą być przyjmowane przez zmienne zapisywane w kolumnach tabel
+
+**Więzy spójności** – w MS Visio są to wyrażenia określające możliwe wartości danego atrybutu, tak jak w relacyjnych bazach danych (na diagramie pojawiają się przy atrybucie w klamerkach)
+
+**Indeksy** – atrybut lub ich grupa, względem której wyszukiwane są egzemplarze encji (o indeksach więcej w zagadnieniu 15)
+
+**Związek** – uporządkowana lista encji określająca pewną zależność między zbiorami instancji encji. 
+- **Związek binarny** – łącząca dwie encje. Ten przykład to też **związek jednoznaczny** (czyli „jeden-do-wiele” – po kluczu obcym widzimy, że jeden student należy do jednej grupy, ale w jednej grupie może być wielu studentów)
+```plantuml
+@startuml
+' hide the spot
+' hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+!theme carbon-gray
+skinparam backgroundColor transparent
+
+entity "Student" as e01 {
+  *person_id: <<PK>>
+  ---
+  *name: text
+  *last_name: text
+  *graduation_date: date
+}
+
+entity "Group" as e02 {
+  *group_id : <<PK>>
+  --
+  details : text
+}
+
+
+e01 }|..|| e02
+
+@enduml
+```
+- **Nie/identyfikujący** – wartość klucza obcego po stronie stroje jeden nie/wchodzi w skład klucza głównego
+- **Niejednoznaczny** – związek typu „wiele-do-wielu”, wymaga stworzenia **encji asocjacyjnej**
+- **Rekurencyjny –** zachodzący między tą samą encją (np. jedna osoba jest szefem innej osoby)
+- **Jedno-jednoznaczny** – typu „jeden-do-jeden”
+
+Zasady prawidłowego projektowania:
+- Prosty i czytelny schemat: powinien być łatwy do zrozumienia przez użytkowników i projektantów.
+- Poprawność logiczna: powinien odpowiadać rzeczywistym relacjom pomiędzy encjami.
+- Odpowiednie określenie typów związków: powinny być odpowiednio oznaczone, aby zapewnić poprawne odwzorowanie relacji.
+- Normalizacja danych: powinna być zachowana, aby uniknąć redundancji danych i zapewnić integralność danych.
+- Elastyczność i skalowalność: powinien być zaprojektowany tak, aby mógł być łatwo rozszerzany i dostosowywany do zmieniających się potrzeb biznesowych
 ## Mechanizm współbieżności pracy wielu użytkowników w systemie zarządzania bazami danych.
 
 >[!info] Poprawność i spójność
