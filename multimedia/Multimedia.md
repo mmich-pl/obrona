@@ -77,7 +77,6 @@ Technika cieniowania wielokątów, w której interpolowany jest wektor normalny 
 > Model ten przyjmuje, że powierzchnia obiektu jest pokryta bardzo cienką przezroczystą warstwą, na której zachodzi odbicie zwierciadlane, tzn. światło nie zmienia swojej barwy, natomiast na powierzchni znajdującej się pod tą warstwą następuje odbicie rozproszone, które zabarwia światło na kolor przypisany do obiektu.
 > 
 > Przyjmuje się, że maksymalne odbicie zwierciadlane zachodzi, gdy kąt pomiędzy promieniem odbitym a kierunkiem do obserwatora jest równy zero. Gdy kąt ten jest większy od zera, wówczas odbicie zwierciadlane bardzo szybko słabnie.
-
 ##### Ray tracing (śledzenie promieni)
 W **metodzie śledzenia promieni** promienie prowadzone są od obserwatora przez każdy piksel ekranu, a śledzenie ich biegu jest kontynuowane promień odbity od danego obiektu może trafić w kolejny obiekt, odbić się znowu itd.
 
@@ -110,6 +109,26 @@ Techniki kompresji zastosowane w MPEG to:
 - **Kodowanie Huffmana** - Kodowanie Huffmana jest techniką kodowania bezstratnego, która jest często używana w MPEG do dalszej redukcji rozmiaru danych. Ta technika zakłada, że częściej występujące symbole mają krótsze sekwencje bitów, podczas gdy rzadziej występujące symbole mają dłuższe sekwencje. Kodowanie Huffmana jest stosowane do danych po kwantyzacji, aby dalej redukować rozmiar strumienia bitowego
 - **Kodowanie predykcyjne** - W MPEG, kodowanie predykcyjne jest używane do obliczenia różnic między ramkami i kodowania tylko tych różnic. To pozwala na dalszą redukcję rozmiaru danych, ponieważ zamiast kodować każdą ramkę osobno, koduje się jedynie zmiany między ramkami. Technika ta jest szczególnie skuteczna, gdy ramki wideo są podobne do siebie, co jest często prawdą w filmach i klipach wideo.
 - Predykcja dwustronna - na podstawie obrazów poprzednich i następnych.
+### Ramki w MPEG
+W Kompresji MPEG mamy **3 rodzaje ramek** (klatek) – nazywane GOP (group of pictures):
+- Ramki odniesienia I (inter) – niezależne od pozostałych ramek
+- Ramki P (predictive) – reprezentują różnicę między bieżącą ramką a ramką odniesienia („przewidywane obrazy”, mniej informacji niż w ramkach B)
+- Ramki B (bidirectional) – mają dwie ramki odniesienia – wcześniejsza i późniejsza (koduje różnice między dwoma sąsiednimi klatkami)
+
+Ramki P i B zawierają informacje o ruchu fragmentów ramki odniesienia – wyliczany jest wektor ruchu dla tych fragmentów, na jego podstawie konstruowana jest klatka P, która jest kodowania JPEG-iem.
+Zazwyczaj nie ma dużych różnic pomiędzy następnymi klatkami nagrania, dlatego w MPEG kodujemy tylko zmiany między ustalonymi ramkami odniesienia.
+
+```mermaid
+flowchart TB
+a[I] 
+b[P] 
+d[P] 
+c[B]
+e[I] 
+f[P] 
+g[P] 
+h[B]
+```
 ## Efekt aliasingu i metody jego zwalczania. Aliasing a częstotliwość  próbkowania.
 ### Aliasing w grafice
 Aliasing w grafice komputerowej to zjawisko zniekształcenia obrazu w wyniku zbyt małej częstości jego próbkowania w procesie rasteryzacji. Jest on skutkiem skończonej rozdzielczości rastra z jakim mamy do czynienia. Rasteryzacja ta zachodzi najczęściej podczas wyświetlania obrazu na ekranie, który obecnie najczęściej jest ekranem rastrowym, ale może dotyczyć także procesu zamiany modelu opisu obrazu z wektorowego na rastrowy.  
