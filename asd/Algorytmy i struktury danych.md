@@ -50,57 +50,44 @@ Złożoność wykonywania różnych algorytmów możemy szacować:
 - od dołu stwierdzając, iż złożoność obliczeniowa jest nie mniejsza niż pewna klasa funkcji Ω(f(n))
 - asymptotycznie, szacując dokładnie złożoność obliczeniową poprzez pewną klasę funkcji Θ(f(n))
 - od góry ograniczając złożoność obliczeniową poprzez pewną klasę funkcji O(f(n))
-
+* * *
 ### Notacja O
-Notacja ta zakłada, że istnieje funkcja g(n), dla której spełniona jest poniższa własność:
-$$\forall n\geq n_0:f(n) \leq c * g(n)$$
-Własność ta oznacza, że wynik funkcji g(n) pomnożony przez jakąś stałą c będzie większy bądź równy wynikowi funkcji f(n).
+Notacja  $O(g(n))$ oznacza zbiór funkcji $f(n)$ , dla których prawdziwe jest zdanie:
+$$\exists c\exists n_0\forall n\geq n_0:f(n) \leq c * g(n)$$
+gdzie c jest pewną liczbą dodatnią. Własność ta oznacza, że wartości dowolnej funkcji $f(n)$ od pewnego miejsca są mniejsze od przeskalowanej funkcji $g(n)$. Warto zwrócić uwagę, że "sztuczka z $n_0$" pozwala na początku funkcji $f(n)$ przekroczyć wartości $g(n)$, ale zapewnia, że jakiegoś momentu zachowana jest relacja między wartościami funkcji w tym samym punkcie.
+
+Warto zwrócić uwagę, że wszystkie notacje oznaczają ZBIORY, jednak popularna notacja używa znaku $=$  zamiast $\in$, które oznacza przynależność do zbioru - należy to równa się interpretować jako należy do. https://math.stackexchange.com/questions/2066004/big-o-notation-is-element-of-or-is-equal
 
 Przykład:
 $$f(n)=2n+3 \Rightarrow f(n) = O(n)$$
-
-$$
-\begin{equation}
-  \begin{split}
-    2n+3 \leq 10n\\ 
-	5\leq 10
-  \end{split}
-\quad\quad
-  \begin{split}
-   2n+3 \leq 7n\\
-   5\leq 7
-  \end{split}
-  \quad\quad
-  \begin{split}
-   2n+3 \leq 2n+3n \Rightarrow 2n+3 \leq 5n 
-   \\ 5\leq 5
-  \end{split}
-\end{equation}
-$$
-
-Dla każdego z powyższych przykładów funkcją $g(n)$ jest $n$, a zmienna c to odpowiednio, 10, 7 i 5.
-Ale prawdą jest również nastepujący zapis:
-
-$$ 2n+3 \leq 2n^2+3n^2 \Rightarrow 2n+3 \leq 5n^2 $$
-$$ 5\leq 25$$
-wtedy $f(n) = O(n^2)$
+Tak samo jak
+$$f(n)=2n+3 \Rightarrow f(n) = O(n^2)$$
 * * *
 ### Notacja Ω
-Notacja ta zakłada, że istnieje funkcja g(n), dla której spełniona jest poniższa własność:
-$$\forall n\geq n_0:f(n) \geq c * g(n)$$
-Własność ta oznacza, że wynik funkcji g(n) pomnożony przez jakąś stałą c będzie mniejszy bądź równy wynikowi funkcji f(n).
+Notacja  $\Omega(g(n))$ oznacza zbiór funkcji $f(n)$ , dla których prawdziwe jest zdanie:
+$$\exists c\exists n_0\forall n\geq n_0:f(n) \geq c * g(n)$$
+Mamy tutaj do czynienia z podobną logiką co w wypadku notacji dużego $O$ jednak relacja zostaje odwrócona, przez co w zbiorze znajdą się wszystkie funkcje, które od pewnego punktu $n_0$ będą zawsze większe od $c*g(n)$.
 Przykład:
 $$f(n)=2n+3 \Rightarrow f(n) = \Omega(n)$$
+Tak samo jak
+$$f(n)=2n+3 \Rightarrow f(n) = \Omega(1)$$
 * * *
 ### Notacja Θ
-Można powiedzieć, że notacja Θ to połączenie notacji Ο i Ω. W tym przypadku funkcja użyta do oszacowania musi spełniać zależność:
+Można powiedzieć, że notacja Θ to połączenie notacji Ο i Ω. W tym przypadku notacja reprezentuje zbiór spełniający :
 
-$$\forall n \geq n_0: c_1 ∗ g(n) \leq f(n) \leq c_2 ∗ g(n)$$
-Można powiedzieć, że wynik funkcji g(n) pomnożony przez stałą $c_1$ będzie większy bądź równy wartości funkcji f(n). Jednocześnie będzie mniejszy bądź równy wartości funkcji f(n) jeśli pomnożymy go przez stałą $c_2$.
+$$\exists c1,c2,n_0\forall n \geq n_0: c_1 ∗ g(n) \leq f(n) \leq c_2 ∗ g(n)$$
+Zapis ten określa najbardziej przydatny dla nas zbiór funkcji, które od pewnego punktu $n_0$ mogą być otoczone funkcją $g(n)$, która zostanie odpowiednio przeskalowana jako jednocześnie ograniczenie dolne jak i górne.
 
 Przykład:
 $$f(n)=2n+3 \Rightarrow f(n) = \Theta(n)$$
 $$1*n \leq 2n+3\leq 5*n$$
+
+* * *
+### Notacje $O$, $\Omega$ i $\Theta$
+Ważnym spostrzeżeniem jest, że notacje $O$ i $\Omega$ dają nam bardzo niejednoznaczne, ale użyteczne określenie. $O$ odpowiada nam, że złożoność jest minimalnie określona daną funkcją a $\Theta$ maksymalnie. $\Theta$ natomiast bardzo ogranicza mówiąc, że funkcja zmienia się w danym tempie.
+
+Prosto to przedstawić na prostym przykładzie. Przyjmijmy, że $f(n) = 4n^2+3n+10$. Taka funkcja jednocześnie należy do $O(n^4)$, $O(n^3)$ jak i $O(n^2)$, ale już nie do $O(n)$ czy $O(1)$. Z omegą mamy sytuację "odwrotną" czyli $f(n)$ należy do $\Omega(1)$, $\Omega(n)$ i $\Omega(n^2)$, ale nie to   $\Omega(n^3)$ czy $\Omega(n^4)$.  W przypadku notacji $\Theta$, $f(n)$ należy tylko do $\Theta(n^2)$.
+
 * * *
 ### Klasy złożoności
 - Ο(1) - złożoność stała - niezależna od liczby danych wejściowych. Mówimy, że problem o złożoności Ο(1) możemy rozwiązać w stałym czasie niezależnie od wielkości danych wejściowych.
@@ -112,13 +99,24 @@ $$1*n \leq 2n+3\leq 5*n$$
 - Ο($x^n$)- złożoność wykładnicza
 - Ο($n!$) - złożoność typu silnia.
 
+Dla $n\in\mathbb{N}$ i $n>1$
 $$ 1 < \log n < \sqrt n < n < n \log n< n^2 <n^3<...<2^n<3^n<n^n$$
 
 ## Najważniejsze algorytmy wyszukiwania i sortowania, przegląd i zastosowania. 
 
+### Sortowanie stabilne
+Sortowanie stabilne to sortowanie, które dla elementów o tej samej wartości nie zmienia ich relatywnej pozycji. Na przykładzie sortowania tablicy ludzi ze względu na wiek.
+[(Kasia 16), (Krzysztof 60), (Ania 11), (Wojtek 16)]
+
+Posortowane stabilnie wyglądały by tak:
+[(Ania 11), (Kasia 16),  (Wojtek 16), (Krzysztof 60)]
+
+Posortowane niestabilnie wyglądały by tak:
+[(Ania 11),  (Wojtek 16), (Kasia 16), (Krzysztof 60)]
+By sortowanie było stabilne pozycja Kasi względem Wojtka musi być zachowana!!!
 ### Algorytmy sortowania
 #### Bubble sort
-Zasada działania opiera się na cyklicznym porównywaniu par sąsiadujących elementów i zamianie ich kolejności w przypadku kiedy, zaburza ona porządek, w jakim sortuje się tablicę. Operację tę wykonujemy dotąd, aż cały zbiór zostanie posortowany.
+Zasada działania opiera się na cyklicznym porównywaniu par sąsiadujących elementów i zamianie ich kolejności w przypadku kiedy, zaburza ona porządek, w jakim sortuje się tablicę. Operację tę wykonujemy dotąd, aż cały zbiór zostanie posortowany. Algorytm zawdzięcza swoją nazwę, temu, że algorytm wypycha największe/najmniejsze wartości w tablicy ku "górze" tablicy niczym bąbelki, które dążą ku górze zbiornika wody.
 
 | Przypadek           | Ilość  zmian | Ilość porównań |
 | ------------------- | ------------ | -------------- |
@@ -126,11 +124,11 @@ Zasada działania opiera się na cyklicznym porównywaniu par sąsiadujących el
 | Najlepszy przypadek | $O(n)$       | $O(1)$         |
 | Średni przypadek    | $O(n^2)$     | $O(n^2)$       |
 
-| Cecha                | Wartość       |
-| -------------------- | ------------- |
-| Złożoność pamięciowa | $O(1)$        |
-| Sortowanie w miejscu | Tak           |
-| Stabilność algorytmu | Jest stabilny |
+| Cecha | Wartość |
+| ---- | ---- |
+| Złożoność pamięciowa | $O(1)$ |
+| Sortowanie w miejscu | Tak |
+| Stabilność sortowania | Jest stabilny |
 
 #### Selection sort
 Zasada działania algorytmu opiera się na wyszukaniu najmniejszego elementu w zbiorze i zamiany go z elementem stojącym na pierwszej pozycji. Następnie szukamy kolejnego najmniejszego elementu  w zbiorze pomniejszonym o element na pierwszej pozycji, po czym wstawiamy go na pozycję drugą. Powtarzamy do momentu otrzymania posortowanej tablicy.
@@ -145,10 +143,10 @@ Zasada działania algorytmu opiera się na wyszukaniu najmniejszego elementu w z
 | -------------------- | ------------- |
 | Złożoność pamięciowa | $O(1)$        |
 | Sortowanie w miejscu | Tak           |
-| Stabilność algorytmu | Nie jest stabilny |
+| Stabilność sortowania | Nie jest stabilny |
 
 #### Merge sort
-Algorytm sortowania przez scalanie opiera się na zasadzie dziel i zwyciężaj. Główna zasada działania polega na rekurencyjnym dzieleniu tablicy na podtablice. Dzielenie kończymy, w którym, każda z podtablic w danej grupie jest tablicą jednoelementową. Łączymy je kolejno, porównując wartości ich elementów. Dokładny przebieg algorytmu wygląda następująco:
+Algorytm sortowania przez scalanie opiera się na zasadzie dziel i zwyciężaj. Główna zasada działania polega na rekurencyjnym dzieleniu tablicy na podtablice. Dzielenie kończymy, w którym, każda z podtablic w danej grupie jest tablicą jednoelementową. Łączymy je kolejno, porównując wartości ich elementów, wykorzystując fakt, że poddane łączeniu tablice są już posortowane. Dokładny przebieg algorytmu wygląda następująco:
 
 Jeśli indeks prawej części tablicy (`rightBound`), jest większy od indeksu lewej (`leftBound`) części tablicy to:
 
@@ -188,11 +186,11 @@ F-->M[82] -->c
 | -------------------- | ------------- |
 | Złożoność pamięciowa | $O(1)$        |
 | Sortowanie w miejscu | Nie           |
-| Stabilność algorytmu | Jest stabilny |
+| Stabilność sortowania | Jest stabilny |
 
 #### Quick sort
-Quick Sort należy do jednego z najszybszych algorytmów sortujących dane. 
-Według ustalonego schematu wybierany jest jeden element w sortowanej tablicy, który będziemy nazywać **pivotem.** Następnie ustawiamy elementy nie większe na lewo tej wartości, natomiast nie mniejsze na prawo. W ten sposób powstaną nam dwie części tablicy (niekoniecznie równe), gdzie w pierwszej części znajdują się elementy nie większe od drugiej. Następnie każdą z tych podtablic sortujemy osobno według tego samego schematu.
+Quick Sort należy do jednego z najpopularniejszych algorytmów sortujących dane.
+Według ustalonego schematu wybierany jest jeden element w sortowanej tablicy, który będziemy nazywać **pivotem(elementem dzielącym).** Następnie ustawiamy elementy nie większe na lewo tej wartości, natomiast nie mniejsze na prawo. W ten sposób powstaną nam dwie części tablicy (niekoniecznie równe), gdzie w pierwszej części znajdują się elementy nie większe od drugiej. Następnie każdą z tych podtablic sortujemy osobno według tego samego schematu.
 
 Algorytm wykorzystuje technikę dziel i zwycieżaj:
 - **Dziel:** Tablica A jest 'dzielona' (jej elementy są przestawiane) na dwie niepuste podtablice.
@@ -209,7 +207,7 @@ Algorytm wykorzystuje technikę dziel i zwycieżaj:
 | -------------------- | ------------- |
 | Złożoność pamięciowa | $O(1)$        |
 | Sortowanie w miejscu | Tak           |
-| Stabilność algorytmu | Nie jest stabilny |
+| Stabilność sortowania | Nie jest stabilny |
 
 ##### Najgorszy przypadek
 Skuteczność algorytmu Quicksort w dużej mierze zależy od doboru pivotu. Załóżmy, że dane wejściowe funkcji Quicksort to **posortowana tablica i jako pivot wybieramy skrajny lewy element.** W tym przypadku będziemy mieli dwie skrajnie niezrównoważone tablice. Jedna tablica będzie miała jeden element, a druga będzie miała (N-1) elementów. 
