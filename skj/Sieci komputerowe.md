@@ -102,7 +102,7 @@ Możemy mieć dwa typy łącz:
 
 Abstrakcyjna warstwa opisana tylko w modelu ISO/OSI. Opisuje ona strukturę danych kodowanych w medium fizycznym. Podstawowe dwa poznane w ramach studiów to Ethernet przy połączeniach kablowych oraz rodzina 802.11 używany do połączeń bezprzewodowych.  Protokoły tej warstwy mogą, ale nie muszą naprawiać błędy generowane przez medium warstwy niższej - przykładem jest korekcja kolizji transmisji w sieciach bezprzewodowych.
 
-Ethernet to "dominująca" technologia LAN, która nadążyła za potrzebą prędkości (10/100/1000Megabit/s). Technolofia nie zapewnia potwierdzenia odbioru z czego wynika zawodność - możliwość gubienia danych.
+Ethernet to "dominująca" technologia LAN, która nadążyła za potrzebą prędkości (10/100/1000Megabit/s). Technologia nie zapewnia potwierdzenia odbioru z czego wynika zawodność - możliwość gubienia danych.
 
 **Ethernet to usługa:**
 -  Bezpołączeniowa – nie ma sygnalizacji pomiędzy nadającym i odbierającym adapterem

@@ -112,6 +112,101 @@ Zasady prawidłowego projektowania:
 - Odpowiednie określenie typów związków: powinny być odpowiednio oznaczone, aby zapewnić poprawne odwzorowanie relacji.
 - Normalizacja danych: powinna być zachowana, aby uniknąć redundancji danych i zapewnić integralność danych.
 - Elastyczność i skalowalność: powinien być zaprojektowany tak, aby mógł być łatwo rozszerzany i dostosowywany do zmieniających się potrzeb biznesowych
+
+### Postacie normalne
+#### Pierwsza postać normalna 1NF
+>[!info] Pierwsza postać normalna to podstawa baz – mówi o **atomowości danych**. Tabela przechowuje dane w sposób atomowy. Każde pole przechowuje jedną informację, dzięki czemu możemy dokonywać efektywnych zapytań. Wprowadza także pojęcie istnienie klucza głównego identyfikującego bezpośrednio każdy wiersz –unikalności.
+
+Przejście na 1NF, **nie może powodować utraty żadnych informacji** , nie ma znaczenia kolejność elementów w zbiorze. Ta zasada dotyczy każdej postaci 
+normlanej.
+
+> Mówimy, że tabela jest w pierwszej postaci normalnej, kiedy wiersz przechowuje informacje o pojedynczym obiekcie, nie zawiera kolekcji, posiada [[Koncepcja modelu relacyjnego#Klucz główny|klucz główny]] a dane są atomowe.
+
+| Nr Zamówienia | Imie | Nazwisko | Ulica  | Numer | Kod Pocztowy | Miasto | Województwo   | Element Zamówienia | Ilość | Wartość zamówienia |
+| ------------- | ---- | -------- | ------ | ----- | ------------ | ------ | ------------- | ------------------ | ----- | ------------------ |
+| 101           | Jan  | Kowalski | Nowa   | 37    | 61-600       | Poznań | Wielkopolskie | Opony 205R         | 4     | 1200               |
+| 102           | Anna | Król     | Wysoka | 12    | 61-600       | Poznań | Wielkopolskie | Alufelgi Silver    | 4     | 2200               |
+| 103           | Jan  | Kowalski | Nowa   | 37    | 61-600       | Poznań | Wielkopolskie | Alufelgi Silver    | 4     | 2200               |
+
+#### Druga postać normalna 2NF
+
+>[!info] Ta postać określa esencję dobrego projektowania bazy. Mówi o tym, że: 
+każda tabela powinna przechowywać dane dotyczące tylko konkretnej klasy 
+obiektów. 
+
+Jeśli mówimy o tabeli np. Klienci, to wszystkie kolumny opisujące elementy takiej encji, powinny dotyczyć Klientów a nie jakiś innych obiektów (np. 
+ich zamówień).
+
+Zatem normalizując do 2NF, należy wydzielić zbiór atrybutów (kolumn) który jest zależny tylko od klucza głównego. Wszystkie atrybuty informacyjne (nie 
+należące do klucza), muszą zawierać informacje o elementach tej konkretnej klasy (encji, tabeli) a nie żadnej innej. Kolumny opisujące inne obiekty, powinny 
+trafić do właściwych encji (tabel) w których te obiekty będziemy przechowywać.
+
+Przykładowe rozdzielenie danych:
+
+**Tabela Zamówień:**
+
+| Nr Zamówienia | Nr Klienta | Kod produktu | Ilość | Wartość zamówienia |
+| ------------- | ---------- | ------------ | ----- | ------------------ |
+| 101           | 1          | 1            | 4     | 1200               |
+| 102           | 2          | 2            | 4     | 2200               |
+| 103           | 1          | 2            | 4     | 2200               |
+
+**Tabela Klienci:**
+
+| Nr Klienta | Imie | Nazwisko | ID Adresu |
+| ---------- | ---- | -------- | --------- |
+| 1          | Jan  | Kowalski | 1         |
+| 2          | Anna | Król     | 2         |
+
+
+**Tabela Adresów:**
+
+| Nr Adresu | Ulica  | Nr lokalu | Miasto | Kod pocztowy | Województwo   |
+| --------- | ------ | --------- | ------ | ------------ | ------------- |
+| 1         | Nowa   | 37        | Poznań | 61-600       | Wielkopolskie |
+| 2         | Wysoka | 12        | Poznań | 61-600       | Wielkopolskie |
+
+
+**Tabela Produktów:**
+
+| Nr Produktu | Nazwa           | Cena jednostkowa |
+| ----------- | --------------- | ---------------- |
+| 1           | Opony 205 R16   | 300              |
+| 2           | Alufelgi Silver | 550              |
+
+
+#### Trzecia postać normalna 3NF
+>Trzecia postać normalna głosi, że **kolumna informacyjna nie należąca do klucza nie zależy też od innej kolumny informacyjnej**, nie należącej do klucza. Czyli każdy niekluczowy argument jest bezpośrednio zależny tylko od klucza głównego a nie od innej kolumny.
+
+#### Postać normalna Boyce'a - Codda
+Postać Boyce'a - Codda jest rozszerzeniem 3 postaci normalnej i ma bardziej restyktyczne zasady:
+
+> Relacja jest w postaci normalnej Boyce’a-Codda wtedy i tylko wtedy, kiedy każdy jej atrybut zależy funkcjonalnie tylko od jej klucza głównego.
+
+Przykład schematów w postaci normalnej Boyce'a-Codda:
+```
+R = {Id_prac, Nazwisko, Funkcja, Stanowisko}
+F: Id_prac => Nazwisko Funkcja Stanowisko
+```
+Nie każdy schemat tabeli da się sprowadzić do zbioru schematów tabel w postaci normalnej Boyce’a-Codda bez utraty zawartych w tabelach informacji i z 
+zachowaniem zależności funkcyjnych. Na przykład schematem takim jest
+
+```
+MUK = {Miasto, Ulica, Kod}
+z zależnościami:
+Miasto, Ulica => Kod
+Kod => Miasto
+```
+
+Istnieją tutaj dwa klucze:
+```
+{Miasto, Ulica}
+{Kod, Ulica}
+```
+
+Ze względu na zależność **Kod => Miasto** schemat MUK nie jest w postaci normalnej Boyce'a-Codda. Tego schematu nie daje się rozłożyć z zachowaniem 
+zależności funkcyjnych (bo jedna z zależności funkcyjnych obejmuje wszystkie atrybuty)
+
 ## Mechanizm współbieżności pracy wielu użytkowników w systemie zarządzania bazami danych.
 
 >[!info] Poprawność i spójność

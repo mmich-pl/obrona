@@ -5,16 +5,12 @@ W Javie:
 - Wykorzystuje **Garbage collector** do zarządzania pamięcią:
 	- Jest to osobny program
 	- Jego celem jest usuwanie nieużywanych obiektów z pamięci JVM (java virtual machine)
-	- Koncepcja garbage collectora powstała w latach 50. na potrzeby języka LISP
 	- Ma 2 typy:
 		- Skalarny – dla każdego obiektu licznik odwołań (referencji do niego). W momencie gdy wynosi on 0, obiekt jest usuwany – ma problem bo **nie wykrywa cyklicznych referencji**
 		- Wektorowy – rozwiązanie problemu algorytmów skalarnych, obiekty są przedstawiane jako **węzły w grafie** (skierowanym) – jak do danego węzła nie da się dotrzeć z żadnego innego węzła, to jest on usuwany, budowę grafu należy zacząć od obiektów, które na pewno są „żywe” (pełnią one rolę korzenia – by obiekt był żywy, musi być w jakiś sposób połączony z korzeniem)  
 	- Ma kilka typów:
 		- Serial – najprostszy: na czas działania wątku garbage collectora, inne wątki są zawieszane. Dobry do prostych (najlepiej jednowątkowych) programów 
 		- Parallel – jak serial, ale garbage collector może mieć wiele wątków. Tryb domyślny w Javie:  
-		- Concurrent Mark Sweep (CMS) – wiele wątków, które są uruchamiane:
-			- Podczas oznaczania obiektów, do których istnieją odniesienia w pamięci
-			- Jeśli równolegle nastąpi zmiana w pamięci sterty podczas czyszczenia pamięci  
 
 W C++:
 - Pamięcią trzeba zarządzać samodzielnie (nie ma garbage collectora)
@@ -39,7 +35,7 @@ W C++:
     - Definiują pola (atrybuty) i metody (funkcje), które opisują stan i zachowanie obiektów.
 	    - Specjalna metoda nazywana **konstruktorem**, która pozwalaj na inicjowanie obiektów przy ich tworzeniu.
 		    - Zawsze ma taką samą nazwę jak klasa
-			- Nie ma typu wyniku (NAWET NIE JEST TYPU VOID)
+			- Nie ma typu wyniku
 			- Ma listę parametrów (która może być pusta – np. hibernate wymaga bezparametrowego konstruktora)
     - Klasy mogą dziedziczyć po innych klasach, co umożliwia reużywanie kodu.
     - Klasy mogą również implementować interfejsy, co oznacza, że muszą dostarczyć ciała dla metod zdefiniowanych w interfejsie.
@@ -348,7 +344,7 @@ void transferMoney(
 >Działania mające na celu zapewnienie współdziałania wątków (m. in. w konkretnej kolejności)
 
 Metody do koordynacji wątków:
--` wait()` – wątek czeka na wydarzenie, które ma się wydarzyć w innym wątku (jak użyjemy go w sekcji krytycznej, to rygiel jest zwalniany), możemy też podać maksymalny czas czekania. Tak jak sleep, rzuca ona `InterruptedException`
+- `wait()` – wątek czeka na wydarzenie, które ma się wydarzyć w innym wątku (jak użyjemy go w sekcji krytycznej, to rygiel jest zwalniany), możemy też podać maksymalny czas czekania. Tak jak sleep, rzuca ona `InterruptedException`
 - `notify()` – powiadamia konkretny jeden inny wątek o wydarzeniu, co kończy jego czekanie (wątek czeka na danym obiekcie)
 - `notifyAll()` – to samo co notify, ale powiadamia wszystkie czekające wątki (zazwyczaj tego się używa, bo nie wiadomo jaki wątek obudzi samo notify)
 
@@ -356,26 +352,73 @@ Metody do koordynacji wątków:
 **Executor** – interfejs do zarządzania wątkami (odseparowanie zadań do wykonania od mechanizmów tworzenia i uruchamiania wątków) – ma metodę void execute(Runnable) – do tworzenia i uruchamiania wątków
 
 Domyślne klasy implementujące Executor:
-- Executors.newSingleThreadExecutor() – po kolei uruchamia podane mu zadania w jednym wątku
-- Executors.newFixedThreadPool() – dysponuje pulą wątków o określonym maksymalnym rozmiarze
+- `Executors.newSingleThreadExecutor()` – po kolei uruchamia podane mu zadania w jednym wątku
+- `Executors.newFixedThreadPool()` – dysponuje pulą wątków o określonym maksymalnym rozmiarze
 - `Executors.newCachedThreadPool()` – pula o dynamicznym rozmiarze
 - `Executors.newScheduled()` – tworzy i wykonuje wątki w określonym czasie i z określoną częstotliwością
 
-`ExecutorService`  - interfejs rozszerzający Executor, ma metody do zamykania Wykonawcy wątków (tak, że nie będzie się dało mu podać nowych zadań do wykonania):
+`ExecutorService`  - interfejs rozszerzający Executor, ma metody do zamykania wykonawcy wątków (tak, że nie będzie się dało mu podać nowych zadań do wykonania):
 - `shutdown()` – zamyka wykonawcę, ale pozwala dokończyć się już uruchomionym wątkom
 - `shutdownNow()` – zamyka wykonawcę i przerywa wszystkie uruchomione wątki
 ## Typy i metody sparametryzowane (generics) w Javie. Szablony  (templates) w C++. 
+W Java, typy i metody sparametryzowane (generics) to mechanizm, który pozwala na tworzenie ogólnych typów i metod, które mogą być używane z różnymi typami danych. Jest to podobne do szablonów w innych językach programowania.
+
+Typ sparametryzowany to typ (wyznaczany przez nazwę klasy lub interfejsu) z dołączonym jednym lub większą liczbą parametrów.
+
+Definicję typu sparametryzowanego wprowadzamy słowem kluczowym class lub interface podając po nazwie (klasy lub interfejsu) parametry w nawiasach kątowych. Parametrów tych następnie używamy w ciele klasy (interfejsu) w miejscu "normalnych" typów
+
+```java 
+class | interface Nazwa < ParametrTypu1, ParametrTypu2, ... ParametrTypuN> {}
+```
+parametryzacji mogą podlegać nie tylko klasy czy interfejsy, ale również metody. Definicja metody sparametryzowanej ma postać:
+
+``` java
+public|private|protected [static] <ParametryTypu> typWyniku nazwa( lista parametrów) {}
+```
+
+Wildcards mają 3 typy:
+	- **Ograniczone z góry** - `<? extends X>` - wszystkie podtypy X
+	- **Ograniczone z dołu** - `< ? super X>` - wszystkie nadtypy X 
+	-  **Nieograniczone** - `<?>` - wszystkie typy – daje nam **biwariancję**: możemy podstawić cokolwiek, jest nadtypem każdej wersji super i extends
+
+--- 
+
+Szablony w C++ to mechanizm, który umożliwia tworzenie ogólnych klas i funkcji, które mogą być używane z różnymi typami danych. Służą one do tworzenia kodu, który jest elastyczny i uniwersalny, a jednocześnie pozwala na kompilację do kodu maszynowego specjalnie dostosowanego do określonych typów danych.
+
+Szablony są definiowane za pomocą słowa kluczowego "template" i nawiasów klamrowych `<>`, w których określa się typ parametru sparametryzowanego. Na przykład: Na podobnej zasadzie co szablony funkcji można tworzyć szablony całych klas, wraz z konstruktorami, destruktorami, polami i metodami. Składnia jest analogiczna:
+
+```cpp
+template <typename T> class Array {
+private:
+    T* ptr;
+    int size;
+public:
+    Array(T arr[], int s);
+    void print();
+};
+
+template <typename T> Array<T>::Array(T arr[], int s){
+    ptr = new T[s];
+    size = s;
+    for (int i = 0; i < s; i++) ptr[i] = arr[i];
+}
+
+template <typename T> void Array<T>::print() {
+    for (int i = 0; i < size; i++) cout << " " << *(ptr + i);
+    cout << endl;
+}
+```
+
 ## Lambda-wyrażenia i interfejsy funkcyjne w języku Java.
 
 >[!info] **Interfejs funkcyjny** – taki, który zawiera tylko jedną abstrakcyjną metodę (SAM – Single Abstract Method)
 
 Każde Lambda-wyrażenie odpowiada jakiemuś interfejsowi funkcyjnemu i jego typ jest wyznaczany przez rodzaj tego interfejsu
 
-Lambda-wyrażenia są zdefiniowane za pomocą składni:
-(lista parametrów) -> {ciało wyrażenia}
+Lambda-wyrażenia są zdefiniowane za pomocą składni: `(lista parametrów) -> {ciało wyrażenia}`
 - ciałem może być jedno wyrażenie lub blok instrukcji w nawiasach klamrowych  
 - jeżeli mamy tylko jeden parametr, to można pominąć nawias, możemy też pomijać typy parametrów jeśli mogą być one określone przez kompilator
-- 
+
 ```java
 import java.util.ArrayList;
 

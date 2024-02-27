@@ -1,5 +1,3 @@
-
-
 ## Całka nieoznaczona, oznaczona, zastosowanie i techniki obliczania.
 
 >[!info] Pochodna funkcji
@@ -269,8 +267,6 @@ W tym równaniu, $\lambda$ – **wartość własna** endomorfizmu $f$.
 
 Przykład endomorfizmu: $f: R^3 \rightarrow R^3$
 Dla $f([1,1,1]) = [5,5,5] = 5*[1,1,1]$ -> wektor własny to $[1,1,1]$, a wartość własna to $5$.
-
-
 
 Zastosowanie wartości własnych w informatyce:
 - Rankingowanie stron internetowych w wyszukiwarce Google (algorytm PageRank – linki między stronami i wagi tych linków są zapisane w macierzach, wartość własna przyspiesza liczenie tych wag)
@@ -544,10 +540,10 @@ Dla poniższego grafu wyglądałoby to następująco:
 
 |     | A   | B   | C   | D   |
 | --- | --- | --- | --- | --- |
-| A   | 0    | 1    | 0    | 1    |
-| B   | 0    | 0    | 1    | 0    |
-| C   | 1    | 0    | 0    | 0    |
-| D   | 0    | 0    | 0    | 0    |
+| A   | 0   | 1   | 0   | 1   |
+| B   | 0   | 0   | 1   | 0   |
+| C   | 1   | 0   | 0   | 0   |
+| D   | 0   | 0   | 0   | 0   |
 
 
 ```tikz
@@ -601,7 +597,7 @@ Operacja iloczynu kartezjańskiego nie jest przemienna.
 >Relacje będziemy oznaczać grecką literą $\rho$. Także jeśli rozpatrujemy relację \$rho$ pomiędzy elementami zbioru $X$ a elementami zbioru $Y$ , czyli relację w iloczynie kartezjańskim $X \times Y$ , to formalnie $\rho \subseteq X \times Y$.
 >
 >Piszemy
-> - $(x, y) \in \rho$ i mówimy, że para $(x, y)$ należy do relacji \rho, albo piszemy
+> - $(x, y) \in \rho$ i mówimy, że para $(x, y)$ należy do relacji $\rho$, albo piszemy
 > - $x \: \rho \: y$ i wtedy mówimy, że element $x$ jest w relacji $\rho$ z elementem $y$, dla $x \in X$ oraz $y \in Y$ .
 
 #### Własności relacji
@@ -726,8 +722,6 @@ Staramy się udowodnić hipotezę alternatywną, co pozwoli na odrzucenie hipote
 
 **Statystyka testowa** – statystyka, na której podstawie orzekamy prawdziwość , oznaczana dużą literą Z (statystyka to kwantyl danego rozkładu. Z karty wzorów patrzymy na odpowiedni kwantyl, zależny od poziomu istotności, i sprawdzamy, czy nasza statystyka testowa jest od niego większa. To znaczy, że należy ona do zbioru krytycznego). W zależności od typu hipotezy, mamy różne wzory na statystykę testową (mieliśmy do tego kartę wzorów)
 
-**Zbiór krytyczny** – zbiór wartości statystyki testowej Z, dla których odrzucamy na korzyść ,  
-oznaczany jako: }
 
 **Błąd II rodzaju** – błąd polegający na przyjęciu , gdy hipoteza  jest prawdziwa
 
@@ -739,19 +733,9 @@ Proces testowania hipotez statystycznych składa się z kilku kroków:
 - **Ocena hipotezy**: Porównuje się otrzymane dane empiryczne z wartościami teoretycznymi i ocenia, czy hipoteza jest potwierdzona lub odrzucona.
 - **Podejmowanie decyzji**: Na podstawie wyniku testu podejmuje się decyzję, czy hipoteza jest potwierdzona lub odrzucona.
 ## Wyznaczanie przedziałów ufności.
-**Estymator punktowy** – jest to statystyka  dla ustalonej funkcji $h$, której celem jest oszacowanie parametru rozkładu oznaczanego jako $\theta$ (parametr to np. mediana, odchylenie standardowe itp.) np. średnia arytmetyczna to estymator wartości oczekiwanej (średniej oznaczanej literą $\mu$ np. w rozkładzie normalnym)
+Przedział ufności jest narzędziem statystycznym, które służy do określenia, jak dokładnie znana jest wartość parametru populacji na podstawie danych empirycznych. Przedział ufności jest określany jako zakres wartości, który z określoną pewnością zawiera prawdziwą wartość parametru populacji.
 
-**Estymator nieobciążony** – niezależnie od tego, jaką wartość ma parametr, funkcja będąca estymatorem nieobciążonym zwraca dokładnie tą wartość parametru, jaka jest w rzeczywistości (średnia z prostej próby losowej jest estymatorem nieobciążonym wartości oczekiwanej)
-
-Przedziały ufności pozwalają nam określić zakres wartości, w jakich znajduje się dany parametr na  $1-\alpha \%$ ($\alpha$ określa **poziom ufności**). Tak jak przy testowaniu hipotez, to jak ten przedział wyliczyć zależy od różnych rzeczy – mieliśmy na to kartę wzorów.
-
-Modele obliczania przedziału ufności:
-1.       Dla wartości oczekiwanej:
-	- Rozkład normalny – znamy odchylenie standardowe
-	- Rozkład normalny – nie znamy odchylenia standardowego
-	- Dowolny rozkład – nie znamy odchylenia standardowego + próbka o wielkości min. 50 obserwacji
-	- Rozkład Bernoulliego – min. 100 obserwacji
-2.       Dla wariancji:
-	- Rozkład normalny – wartość oczekiwana jest znana
-	- Rozkład normalny – wartość oczekiwana nie jest znana
-	- Rozkład dowolny – wartość oczekiwana nie jest znana + min. 100 obserwacji
+Wyznaczanie przedziału ufności można wykonać na kilka sposobów, w tym:
+- Metoda naiwna: Przedział ufności jest wyznaczany na podstawie otrzymanego rozkładu danych empirycznych i jest oparty na założeniu, że jest on bliski rozkładowi normalnemu
+- Metoda bootstrap: W tej metodzie przedział ufności jest wyznaczany na podstawie symulacji danych na podstawie istniejących danych empirycznych.
+- Metoda kwantyli: W tej metodzie przedział ufności jest wyznaczany na podstawie kwantyli rozkładu danych empirycznych

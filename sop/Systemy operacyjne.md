@@ -39,7 +39,7 @@
 ### Klasyfikacja systemów operacyjnych ze względu na sposób przetwarzania
 W przypadku systemu **przetwarzania bezpośredniego** użytkownik wprowadza zadanie do systemu i oczekuje na wyniki. W trakcie przetwarzania jest zatem możliwa interakcja pomiędzy użytkownikiem a systemem (aplikacją).
 
-W przypadku **przetwarzania pośredniego** zadanie jest realizowane w czasie wybranym przez system. Po przedłożeniu zadania ingerencja użytkownika jest niemożliwa. Wszystkie dane muszą być zatem dostępne w momencie przedkładania zadania, a jakikolwiek błąd programowy (np. niekompletność danych) oznacza konieczność przedłożenia i wykonania zadania ponownie.
+W przypadku **przetwarzania pośredniego** zadanie jest realizowane w czasie wybranym przez system. Podczas przetwarzania zadania ingerencja użytkownika jest niemożliwa. Wszystkie dane muszą być zatem dostępne w momencie przetwarzania zadania, a jakikolwiek błąd programowy (np. niekompletność danych) oznacza konieczność wykonania zadania ponownie.
 ### Klasyfikacja systemów operacyjnych ze względu na liczbę wykonywanych programów
 **Systemy jednoprogramowe**, zwane też jednozadaniowymi, umożliwiają uruchomienie jednego zadania użytkownika.
 
@@ -198,7 +198,7 @@ Przydział ciągły jest najprostszym z modeli zarządzania pamięcią. W modelu
 
 Każdy proces widzi spójny obszar pamięci określonej wielkości. Adresy logiczne mają zakres od 0 do wielkości przydzielonego obszaru minus jeden. 
 
-MMU zawiera dwa programowalne rejestry. Rejestr przemieszczenia zawiera początkowy adres fizyczny przydzielonego obszaru. Rejestr graniczny zawiera wielkość przydzielonego obszaru.
+MMU (**Jednostka zarządzania pamięcią** ang.  _memory management unit_) zawiera dwa programowalne rejestry. Rejestr przemieszczenia zawiera początkowy adres fizyczny przydzielonego obszaru. Rejestr graniczny zawiera wielkość przydzielonego obszaru.
 #### Fragmentacja zewnętrzna i kompaktyfikacja
 W momencie uruchomienia procesu, system operacyjny musi przydzielić procesowi pamięć. Wolna pamięć fizyczna może być poszatkowana przydzielonymi już obszarami na wiele fragmentów. Może się więc tak zdarzyć, że łączna ilość wolnej pamięci będzie wystarczająca, ale nie będzie jednego spójnego obszaru, wystarczająco dużego, żeby przydzielić z niego pamięć dla procesu. Zjawisko takie nazywamy fragmentacją zewnętrzną.
 

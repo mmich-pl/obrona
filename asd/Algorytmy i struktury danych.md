@@ -90,7 +90,7 @@ Prosto to przedstawić na prostym przykładzie. Przyjmijmy, że $f(n) = 4n^2+3n+
 
 * * *
 ### Klasy złożoności
-- Ο(1) - złożoność stała - niezależna od liczby danych wejściowych. Mówimy, że problem o złożoności Ο(1) możemy rozwiązać w stałym czasie niezależnie od wielkości danych wejściowych.
+- Ο(1) - złożoność stała -mówimy, że problem o złożoności Ο(1) możemy rozwiązać w stałym czasie niezależnie od wielkości danych wejściowych.
 - Ο(n) - złożoność liniowa - jest to specyficzny przypadek złożoności wielomianowej. Czas rozwiązania problemu jest wprost proporcjonalny do wielkości danych wejściowych.
 - Ο($\log(n)$)- złożoność logarytmiczna - czas rozwiązania zależy od wyniku logarytmu z wielkości danych wejściowych.
 - Ο($n \log(n)$) - złożoność liniowo-logarytmiczna - czas rozwiązania problemu jest wprost proporcjonalny do iloczynu wielkości danych wejściowych i ich logarytmu.
@@ -116,7 +116,7 @@ Posortowane niestabilnie wyglądały by tak:
 By sortowanie było stabilne pozycja Kasi względem Wojtka musi być zachowana!!!
 ### Algorytmy sortowania
 #### Bubble sort
-Zasada działania opiera się na cyklicznym porównywaniu par sąsiadujących elementów i zamianie ich kolejności w przypadku kiedy, zaburza ona porządek, w jakim sortuje się tablicę. Operację tę wykonujemy dotąd, aż cały zbiór zostanie posortowany. Algorytm zawdzięcza swoją nazwę, temu, że algorytm wypycha największe/najmniejsze wartości w tablicy ku "górze" tablicy niczym bąbelki, które dążą ku górze zbiornika wody.
+Zasada działania opiera się na cyklicznym porównywaniu par sąsiadujących elementów i zamianie ich kolejności w przypadku kiedy, zaburza ona porządek, w jakim sortuje się tablicę. Operację tę wykonujemy dotąd, aż cały zbiór zostanie posortowany. 
 
 | Przypadek           | Ilość  zmian | Ilość porównań |
 | ------------------- | ------------ | -------------- |
@@ -146,7 +146,7 @@ Zasada działania algorytmu opiera się na wyszukaniu najmniejszego elementu w z
 | Stabilność sortowania | Nie jest stabilny |
 
 #### Merge sort
-Algorytm sortowania przez scalanie opiera się na zasadzie dziel i zwyciężaj. Główna zasada działania polega na rekurencyjnym dzieleniu tablicy na podtablice. Dzielenie kończymy, w którym, każda z podtablic w danej grupie jest tablicą jednoelementową. Łączymy je kolejno, porównując wartości ich elementów, wykorzystując fakt, że poddane łączeniu tablice są już posortowane. Dokładny przebieg algorytmu wygląda następująco:
+Algorytm sortowania przez scalanie opiera się na zasadzie dziel i zwyciężaj. Główna zasada działania polega na rekurencyjnym dzieleniu tablicy na podtablice. Dzielenie kończymy na kroku, w którym, każda z podtablic w danej grupie jest tablicą jednoelementową. Łączymy je kolejno, porównując wartości ich elementów, wykorzystując fakt, że poddane łączeniu tablice są już posortowane. Dokładny przebieg algorytmu wygląda następująco:
 
 Jeśli indeks prawej części tablicy (`rightBound`), jest większy od indeksu lewej (`leftBound`) części tablicy to:
 
@@ -216,14 +216,19 @@ Podobnie, gdy dana **tablica wejściowa jest posortowana odwrotnie, a jako eleme
 
 **Unikanie najgorszego przypadku**
 - wybór pivota ze środka tablicy. W ten sposób możemy podzielić tablicę wejściową na dwie subtablice o podobnej liczbie elementów.
-- wybór losowych losowego pivota - takie działanie przy każdym wywołaniu zmniejszy prawdopodobieństwo osiągnięcia najgorszego przypadku zachowania. Bardziej prawdopodobne jest, że będziemy wybierać pivoty znajdujące się bliżej środka tablicy, a gdy tak się stanie, rekurencja rozgałęzia się bardziej równomiernie, a tym samym algorytm kończy się znacznie szybciej.
+- wybór losowego pivota - takie działanie przy każdym wywołaniu zmniejszy prawdopodobieństwo osiągnięcia najgorszego przypadku zachowania. Bardziej prawdopodobne jest, że będziemy wybierać pivoty znajdujące się bliżej środka tablicy, a gdy tak się stanie, rekurencja rozgałęzia się bardziej równomiernie, a tym samym algorytm kończy się znacznie szybciej.
 
 Można też przetasować (shuffle) wejściową listę, aby mieć pewność, że na pewno nie będzie posortowana lub prawie posortowana
 
 #### Radix sort
 Sortowanie pozycyjne jest stabilnym algorytmem sortowania. Dzięki niemu możemy posortować wyrażenia złożonych z dowolnych znaków. Sortowanie zaczynamy od znaków na pozycjach najmniej znaczących, czyli od ostatnich znaków wyrażenia. Kolejny krok polega, aby posortować wyrażenia według przedostatniego znaku i tak kontynuujemy, aż dotrzemy do pierwszego znaku.
 
-Algorytm sortujący według znaku jest dowolny. Możemy użyć tutaj algorytmu bąbelkowe o złożoności $O(n^2)$ jak również sortowania szybkiego o złożoności $O(n \log n)$.
+523       472        523       266
+266       523        349       349
+783 --> 783 --> 266 --> 472
+472       266        472       523
+349       349        783       783
+        ^          ^        ^
 
 W przypadku radix sortu złożoność wyniesie $O(d*a)$, gdzie $d$ określa ilu znakowe są porównywane elementy, a $a$ to złożoność czasowa wybranego algorytmu sortowania. Dla połączenia radix sort i count sort złożoność wyniesie $O(d(n+k))$.
 
@@ -234,14 +239,15 @@ Jest to najprostszy algorytm wyszukiwania o złożoności czasowej $O(n)$
 Algorytm wyszukiwania liniowego przechodzi przez każdy element tablicy sekwencyjnie. 
 - Jeśli porównywany element nie jest równy szukanemu elementowi, algorytm przechodzi do następnego elementu aż do osiągnięcia końca tablicy. Jeżeli go osiągnie, jest to równoznaczne z informacją, że szukanego elementu nie ma w tablicy.
 - Jeżeli porównywany element jest równy z szukanym algorytm zwraca jego indeks i kończy działanie.
-- 
 ##### Wyszukiwanie liniowe z wartownikiem
+W podstawowej wersji algorytmu porównujemy czy indeks mieści się nadal w tabeli oraz czy element pod indeksem jest równy szukanemu.
+
 Liczbę porównań można zredukować wykorzystując algorytm wyszukiwania z wartownikiem. Nazwa tego algorytmu bierze się ze sposobu, w jaki wykorzystywany jest element szukany $x$.  
   
 Żeby odnaleźć element $x$ podejmiemy następujące kroki:  
 -  na końcu tablicy wstawimy szukany element $x$ - będzie to nasz wartownik,
 -   w algorytmie przechodzimy po kolejnych elementach tablicy, tak długo aż nie znajdziemy szukanego elementu,
--   w momencie znalezienia szukanego elementu $x$ sprawdzamy, który jest to element tablicy? Jeżeli jest to ostatni element tablicy (_n+1_) to trafiliśmy na naszego wartownika i oznacza to, że w tablicy nie było szukanego elementu $x$, w przeciwnym razie element $x$ został odnaleziony.
+- w momencie znalezienia szukanego elementu $x$ sprawdzamy, który jest to element tablicy. Jeżeli jest to ostatni element tablicy (_n+1_) to trafiliśmy na naszego wartownika i oznacza to, że w tablicy nie było szukanego elementu $x$, w przeciwnym razie element $x$ został odnaleziony.
 #### Wyszukiwanie binarne
 Algorytm szuka danego elementu w **uporządkowanej** (posortowanej) tablicy. Jest to szybki algorytm wyszukujący o złożoności czasowej $O(log \ n)$ realizujacy strategię dziel i zwycieżaj. Dzieli on tablicę na mniejsze podtablice do momentu wyszukania pozycji (lub nie w przypadku gdy taki element nie istnieje) elementu szukanego.
 
@@ -472,7 +478,7 @@ Kolejka priorytetowa jest abstrakcyjnym typem danych. Istnieją różne implemen
 
 Kolejki priorytetowe typu max są używane m.in. do szeregowania procesów w jądrach systemów operacyjnych lub w algorytmie Dijkstry wyznaczania najkrótszych ścieżek w grafach.
 
-Kolejka ma początek (głowę) oraz koniec (ogon). Kiedy wstawiamy nowy element do kolejki, zostaje on umieszczony na jej końcu. Element może zostać usunięty z kolejki tylko wtedy, gdy znajduje się na jej początku.
+Kolejka ma początek (głowę) oraz koniec (ogon). Element może zostać usunięty z kolejki tylko wtedy, gdy znajduje się na jej początku.
 
 #### Operacje na wykonywane na kolejkach
 Oferuje ona następujące operacje:
@@ -493,17 +499,10 @@ Drzewa są zbudowane z węzłów (nodes). W węzłach przechowywane są dane. W�
 #### Przodek i potomek
 - Każdy węzeł _y_ na ścieżce z korzenia do węzła _x_ nazywamy **przodkiem** węzła x. 
 - Jeżeli _y_ jest przodkiem _x_, to _x_ jest **potomkiem** _y_.
-- Jeżeli $x \neq y$ to _y_ jest **właściwym przodkiem** _x_, a _x_ jest **właściwym potomkiem** _y_.
-
 #### Poddrzewo
 **Poddrzewo** o korzeniu _x_ jest drzewem utworzonym z potomków _x_, którego korzeniem jest węzeł _x_.
-
-#### Poprzednik i następnik
-- Jeżeli ostatnią krawędzią drzewa T na ścieżce od korzenia do węzła _x_ jest (y, x), to _y_ jest **poprzednikiem** (ojcem) _x_, a _x_ jest **następnikiem** (synem) _y_.
-- Jeżeli dwa węzły mają ten sam poprzednik, to nazywamy je braćmi. 
-
 #### Liście 
-- Węzeł, który** nie ma** następników jest **węzłem zewnętrznym** lub **liściem**. 
+- Węzeł, który **nie ma** potomków jest **węzłem zewnętrznym** lub **liściem**. 
 - Węzeł, który **nie jest** liściem, jest **węzłem wewnętrznym**.
 
 #### Wysokość drzewa

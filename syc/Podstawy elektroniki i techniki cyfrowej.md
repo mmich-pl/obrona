@@ -1,5 +1,8 @@
 ## Implementacje podstawowych elementów pasywnych (rezystorów, kondensatorów i cewek). 
-- **Rezystor, opornik** - ograniczenie płynącego prądu, zamienia prąd w ciepło. Jego parametrem jest rezystancja, mierzona w Omach. Rezystancja jest relacją między napięciem a natężeniem prądu. Drugim parametrem jest moc strat wyrażana w Watach - największa dopuszczalna moc wydzielana na rezystorze.  
+
+>[!info] Rezystancja to stosunek napięcia (V – wolty) na krańcach materiału do prądu (A – ampery) płynącego przez ten materiał. Mierzona w Ω – omach. Rezystancja zależy od rezystywności danego materiału i jego wymiarów.
+
+- **Rezystor, opornik** - wykorzystywany jest do ograniczenia prądu płynącego w obwodzie elektrycznym. Jest również elementem stratnym: przy przepływie prądu energia elektryczna, wydzielana w postaci ciepła, jest bezpowrotnie tracona. Rezystory składają się zwykle z korpusu izolacyjnego z wyprowadzeniami oraz z części oporowej.
 - **Kondensator** - zbudowany jest z dwóch przewodników rozdzielonych izolatorem. Gromadzi ładunek elektryczny, ma określoną pojemność, mierzoną w Faradach.  
 - **Cewka** - zwoje przewodnika nawinięte na rdzeń magnetyczny. Jest elementem rezystancyjnym. Jej parametrem jest indukcyjność, mierzona w Henrach. Indukcyjność to zdolność cewki do przechowywania energii w postaci pola elektromagnetycznego. Cewka gromadzi energię, wytwarza pole elektromagnetyczne.
 
@@ -42,7 +45,7 @@ Metody obsługi zdarzeń:
 - **Zapytywanie** (ang. Polling) - aktywne, okresowe, próbkowanie (sprawdzanie) statusu urządzeń zewnętrznych przez kontroler. 
 ### Polling
 - Technika polling jest najczęściej używana w kontekście obsługi urządzeń wejścia/ wyjścia. Komputer centralny cyklicznie sprawdza stan urządzenia zewnętrznego w oczekiwaniu na gotowość tego urządzenia,
-- Polling znajduje zastosowanie w sytuacjach, gdy komputer łączy się z zewnętrznymi urządzeniami w celu zebrania (odświeżenia) danych, przy czym współpraca ta odbywa się w trybie off-line,
+- Polling znajduje zastosowanie w sytuacjach, gdy komputer łączy się z zewnętrznymi urządzeniami w celu zebrania (odświeżenia) danych, przy czym współpraca ta odbywa się w trybie offline,
 - W systemach, które wymagają wykonania wielu zadań polling jest mało efektywny w stosunku do przerwań.
 
 ### Przerwania

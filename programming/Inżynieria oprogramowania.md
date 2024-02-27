@@ -29,10 +29,11 @@ Podstawowe działania związane z zarządzaniem projektem oprogramowania to:
 
 Kontekst pozatechniczny zarządzania projektem budowy oprogramowania obejmuje wpływ czynników zewnętrznych, takich jak polityka i regulacje prawne, kultura organizacyjna, dostępność zasobów i relacje między zespołem projektowym a klientem. Ważne jest, aby uwzględniać te czynniki w trakcie planowania i realizacji projektu, aby uniknąć potencjalnych problemów i zapewnić sukces projektu.
 ## Język UML – charakterystyka oraz sposób wsparcia różnorodnych modeli danych.
-## Wzorce projektowe oraz ramy programistyczne (frameworks) – charakterystyka, przykłady, zastosowania.  **Wzorce projektowe** – wielokrotnie powtarzające się i pozytywnie zweryfikowane schematy rozwiązań często spotykanych problemów projektowych. Dotyczą architektury całej aplikacji, a nie pojedynczej klasy. Stosowanie ich pozwala na pisanie **lepszych, bardziej efektywnych, skalowalnych, łatwiej modyfikowalnych, mniej narażonych na błędy programów**
+## Wzorce projektowe oraz ramy programistyczne (frameworks) – charakterystyka, przykłady, zastosowania. 
+
+**Wzorce projektowe** – wielokrotnie powtarzające się i pozytywnie zweryfikowane schematy rozwiązań często spotykanych problemów projektowych. Dotyczą architektury całej aplikacji, a nie pojedynczej klasy. Stosowanie ich pozwala na pisanie **lepszych, bardziej efektywnych, skalowalnych, łatwiej modyfikowalnych, mniej narażonych na błędy programów**
 
 Wzorce projektowe to dobrze udokumentowane i ustandaryzowane sposoby rozwiązywania często powtarzających się problemów w programowaniu. Są to gotowe rozwiązania, które można łatwo zastosować w wielu różnych sytuacjach, zapewniając jednocześnie przewidywalne i stabilne działanie oprogramowania. Wzorce projektowe są szczególnie przydatne w programowaniu obiektowym, takim jak Java.
-
 
 Wzorce projektowe dzielą się na 3 klasy:
 1. **Konstrukcyjne** – tworzenie obiektów, delegowanie procesu tworzenia do innych klas, kontrola nad sposobem tworzenia obiektów:
